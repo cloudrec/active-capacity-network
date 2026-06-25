@@ -1,0 +1,7 @@
+{
+  "capacity_base": "https://capacity.469diamond.com",
+  "auction_base": "https://auction.469diamond.com",
+  "role": "light",
+  "poll_seconds": 60,
+  "node_name": "my-acn-node"
+}

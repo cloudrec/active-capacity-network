@@ -1,0 +1,49 @@
+{
+  "bundle": "acap-local-devnet-bootstrap",
+  "kind": "NON_PRODUCTION_LAB_DEVNET",
+  "production": false,
+  "mainnet": false,
+  "rewards": false,
+  "mining": false,
+  "custody": false,
+  "consensus": "qbft",
+  "chain_id": 469469,
+  "rpc_port": 8545,
+  "p2p_port": 30303,
+  "rpc_exposure": "loopback_only",
+  "rpc_http_host": "127.0.0.1",
+  "host_allowlist": [
+    "127.0.0.1"
+  ],
+  "p2p_enabled": false,
+  "discovery_enabled": false,
+  "p2p_interface": "127.0.0.1",
+  "p2p_exposure": "disabled",
+  "p2p_public_listener": false,
+  "validators_count": 1,
+  "validators": [
+    {
+      "index": 1,
+      "address": "0x7e0b6D4f3891c71E4A0E3AE28Cc667AFF4dDD5Bb"
+    }
+  ],
+  "genesis_file": "genesis.json",
+  "config_file": "config.toml",
+  "validator_key_files": [
+    "validators/validator-1/key"
+  ],
+  "warning": "Validator keys are NON-PRODUCTION LAB keys. Not user wallet keys. Never reuse on public/production networks.",
+  "files": {
+    "README_DEVNET_LAB.md": "ab3a5bb51491760dccb1dcdb003b4e383d7022ac9df568eb677aae7759231483",
+    "WARNINGS_NON_PRODUCTION_KEYS.txt": "473c2a60d39fd4ce79bc86b40e25632c78992d5903caf25aecb60e819f1a8691",
+    "config.toml": "a0c2a1811828df60775be200ccce9221afd280890b6f21f699031e7d141e0838",
+    "genesis.json": "b833c18b3f3c4cd0531059cfd04d5bb3340212b04202201628c59882aa37662c",
+    "scripts/check-devnet.ps1": "41f402860dd432024fa03e602b9bda9d20b69785b8cb21e7aa5408c28130a6da",
+    "scripts/start-devnet.ps1": "9f35e3dc36ba7d4c726e6e24a4ea00aada07155586630163888def6f2356582e",
+    "scripts/stop-devnet.ps1": "99f93a8e94dc5c8bfe260a2a7dbb848738c87d002e211a7b6d9cb85df3e46764",
+    "static-nodes.example.json": "8c37d9002ebb3ff7053681a9470536a79e2a68ed8e653a05cddbef3218930a83",
+    "validators/validator-1/address": "02f0bfa49cac144078088414f31ce53038de8a4e142048340f4572c4262c57a6",
+    "validators/validator-1/key": "4f7c52e3eda8799344ff36526d97ad10a64cd4a9e4a6a0747f623cb3da94cee0",
+    "validators/validator-1/key.pub": "3aa5b68e2b99855575396616c11934a9e637e547e6b1aaa4077843dc25a26d88"
+  }
+}

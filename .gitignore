@@ -1,0 +1,44 @@
+# --- secrets / local config (NEVER commit) ---
+.env
+*.env
+!*.env.example
+**/ADMIN_CREDENTIALS.txt
+**/data/capacity.db
+*.key
+**/validators/**/key
+!**/validators/**/key.example
+!**/validators/**/key.pub
+*.pem
+*.p12
+*.pfx
+id_rsa*
+*.mnemonic
+*.seed
+
+# --- build artifacts ---
+bin/
+obj/
+*.exe
+*.dll
+*.pyd
+*.so
+*.zip
+*.7z
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+
+# --- runtime / chain data ---
+.acap-devnet/
+**/runtime/python/
+logs/
+*.log
+data/live_cache/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

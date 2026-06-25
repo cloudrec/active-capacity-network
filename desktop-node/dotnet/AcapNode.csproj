@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Native Windows EXE, self-contained: no .NET runtime needed on the host. -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <!-- Output binary name -->
+    <AssemblyName>ACAP.Node</AssemblyName>
+    <Version>0.5.4</Version>
+    <FileVersion>0.5.4.0</FileVersion>
+    <InformationalVersion>0.5.4-windows-qa-fix-preview</InformationalVersion>
+    <Company>Active Capacity Network (private preview)</Company>
+    <Product>ACAP Desktop Node</Product>
+    <Description>ACAP Desktop Node launcher (private preview, devnet/testnet only — no mainnet, no rewards, loopback only). Standalone-safe: embeds + extracts the Python node files.</Description>
+  </PropertyGroup>
+
+  <!-- Embedded Python node resources so a copied-alone ACAP.Node.exe is standalone-safe.
+       LogicalName "acapres/<relpath>" drives runtime extraction in Program.cs. -->
+  <ItemGroup>
+    <EmbeddedResource Include="../../active-capacity-node-windows/acap_desktop.py" LogicalName="acapres/acap_desktop.py" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/acap_wallet.py" LogicalName="acapres/acap_wallet.py" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/acap_node_manager.py" LogicalName="acapres/acap_node_manager.py" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/acap_besu_wallet.py" LogicalName="acapres/acap_besu_wallet.py" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/acap_keccak.py" LogicalName="acapres/acap_keccak.py" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/lab_config.example.json" LogicalName="acapres/lab_config.example.json" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/web/index.html" LogicalName="acapres/web/index.html" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/README_DESKTOP_NODE.md" LogicalName="acapres/README_DESKTOP_NODE.md" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/README_FIRST_RUN_WINDOWS.md" LogicalName="acapres/README_FIRST_RUN_WINDOWS.md" />
+    <EmbeddedResource Include="../../active-capacity-node-windows/TROUBLESHOOTING_WINDOWS_NODE.md" LogicalName="acapres/TROUBLESHOOTING_WINDOWS_NODE.md" />
+    <!-- NON-PRODUCTION local-devnet bootstrap bundle so a standalone-extracted EXE can also
+         run the one-click local devnet (when Besu+Java exist). Lab keys only. -->
+    <EmbeddedResource Include="../../active-capacity-node-windows/runtime/devnet/**/*">
+      <LogicalName>acapres/runtime/devnet/%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

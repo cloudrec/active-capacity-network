@@ -1,0 +1,134 @@
+{
+  "version": "0.2.0-preview",
+  "updated_at": "2026-06-25",
+  "status": "preview-tokenomics",
+  "status_label": "Preview tokenomics — not a public mainnet token",
+  "preview": true,
+  "mainnet": false,
+  "token_name": "Active Capacity Token",
+  "ticker": "ACAP",
+  "max_supply": 1000000000,
+  "decimals": 18,
+  "ui_decimals": "2-4",
+  "mint_policy": "fixed-hard-cap-no-unlimited-mint",
+  "mint_policy_label": "Fixed hard cap — no unlimited mint",
+  "sale_active": false,
+  "reservation_active": false,
+  "buy_enabled": false,
+  "current_circulating_supply": 0,
+  "available_for_purchase": 0,
+  "available_for_reservation": 0,
+  "current_round": null,
+  "current_round_status": "none-active",
+  "current_pool_status": "planned-not-active",
+  "contract_address": null,
+  "contract_deployed": false,
+  "active_capacity_model": {
+    "headline": "Active Capacity Reservation — not a fixed-term lease",
+    "no_fixed_term": true,
+    "no_forced_expiration": true,
+    "holder_owns_token": true,
+    "principles": [
+      "ACAP belongs to the holder. There is no fixed expiration term.",
+      "You reserve active network capacity — you are not renting tokens for a fixed period.",
+      "ACAP remains yours while held; nothing expires or is taken back after a term.",
+      "Active-capacity status depends on movement, node use, reservation activity or other network participation.",
+      "Inactive ACAP is not confiscated, but its active-capacity weight may pause, decay or become inactive until reactivated.",
+      "Reactivation can happen through movement, node participation or other defined network actions.",
+      "Value comes from capacity, movement, participation, anti-spam and network usefulness — not from a rental clock."
+    ]
+  },
+  "supply": {
+    "total_supply": 1000000000,
+    "max_supply": 1000000000,
+    "circulating_supply": 0,
+    "available_for_purchase": 0,
+    "available_for_reservation": 0,
+    "locked_reserved": 1000000000,
+    "node_operator_reserve": 150000000,
+    "node_rewards_reserve": 150000000,
+    "ecosystem_reserve": 150000000,
+    "team_locked": 150000000,
+    "treasury_reserve": 200000000,
+    "liquidity_reserve": 150000000,
+    "public_community": 100000000,
+    "strategic_partners": 100000000,
+    "burned": 0
+  },
+  "allocations": [
+    {"key": "public_community", "label": "Public / community / early users", "percent": 10, "tokens": 100000000, "locked": false, "notes": "Distributed via planned reservation pools and community programs."},
+    {"key": "node_operator", "label": "Node operator reserve", "percent": 15, "tokens": 150000000, "locked": true, "notes": "Reserved for node operators. Released by transparent rule. Not live."},
+    {"key": "ecosystem", "label": "Ecosystem grants / developers / integrations", "percent": 15, "tokens": 150000000, "locked": true, "notes": "Grants for builders and integrations; rule-based release."},
+    {"key": "liquidity", "label": "Liquidity / exchange reserve", "percent": 15, "tokens": 150000000, "locked": true, "notes": "Reserved for future liquidity. No trading or listing is live."},
+    {"key": "treasury", "label": "Treasury / company reserve", "percent": 20, "tokens": 200000000, "locked": true, "notes": "Long-term operations and runway; transparent release."},
+    {"key": "team", "label": "Team / founders (locked)", "percent": 15, "tokens": 150000000, "locked": true, "notes": "Vesting/lock schedule defined before any release."},
+    {"key": "strategic", "label": "Strategic partners / advisors / legal / infrastructure", "percent": 10, "tokens": 100000000, "locked": true, "notes": "Partnerships, legal and infrastructure; rule-based release."}
+  ],
+  "current_pool": {
+    "pool_number": 1,
+    "name": "Active Capacity Reservation Pool 1",
+    "total_acap": 1000000,
+    "status": "planned",
+    "status_label": "Planned — not active",
+    "available_now": 0,
+    "reserved": 0,
+    "available_in_pool": 0,
+    "current_tier": 1,
+    "current_tier_price_usd": 0.001,
+    "next_tier_price_usd": 0.0015,
+    "currency": "USD",
+    "note": "Planned reservation pool. Not open. The next reservation tier becomes more expensive as the active-capacity pool is reserved. This is a capacity-pricing mechanism, not an investment promise."
+  },
+  "pricing_tiers": [
+    {"tier": 1, "range_from": 0, "range_to": 250000, "price_usd": 0.001, "tier_supply": 250000, "status": "planned", "notes": "0 – 250,000 ACAP reserved."},
+    {"tier": 2, "range_from": 250001, "range_to": 500000, "price_usd": 0.0015, "tier_supply": 250000, "status": "planned", "notes": "250,001 – 500,000 ACAP reserved."},
+    {"tier": 3, "range_from": 500001, "range_to": 750000, "price_usd": 0.002, "tier_supply": 250000, "status": "planned", "notes": "500,001 – 750,000 ACAP reserved."},
+    {"tier": 4, "range_from": 750001, "range_to": 1000000, "price_usd": 0.003, "tier_supply": 250000, "status": "planned", "notes": "750,001 – 1,000,000 ACAP reserved."}
+  ],
+  "rounds": [
+    {"round": 1, "tokens": 1000000, "price_usd_from": 0.001, "price_usd_to": 0.003, "price_label": "$0.001 – $0.003 (tiered)", "status": "planned", "notes": "Planned earliest reservation round (Pool 1), tiered pricing. Not open. Subject to final legal and contract review."},
+    {"round": 2, "tokens": 4000000, "price_usd_from": null, "price_usd_to": null, "price_label": "TBD", "status": "draft", "notes": "Draft. Price/tier to be defined. Not open."},
+    {"round": 3, "tokens": 20000000, "price_usd_from": null, "price_usd_to": null, "price_label": "TBD", "status": "draft", "notes": "Draft. Price/tier to be defined. Not open."}
+  ],
+  "rounds_summary": {
+    "planned_pool_acap": 1000000,
+    "draft_rounds_acap": 24000000,
+    "rounds_active": 0,
+    "reservation_active": false,
+    "buy_enabled": false,
+    "later_allocations": "Later public / community allocations TBD."
+  },
+  "utility": [
+    {"key": "node_participation", "label": "Node participation", "text": "Participation weight for running a node in the network (design stage)."},
+    {"key": "capacity_reservation", "label": "Active capacity reservation", "text": "Reserve active network capacity for projects and issuers — no fixed term."},
+    {"key": "anti_spam", "label": "Anti-spam / network actions", "text": "Small cost on network actions to deter spam and abuse."},
+    {"key": "reputation", "label": "Future validator / operator reputation", "text": "Planned input into validator and operator reputation scoring."},
+    {"key": "ecosystem_access", "label": "Ecosystem access", "text": "Access to ecosystem features, grants and integrations."},
+    {"key": "fee_unit", "label": "Possible future fee / payment unit", "text": "Possible future unit of account for fees inside the network. Not a payment system today."}
+  ],
+  "divisibility": {
+    "technical_decimals": 18,
+    "ui_decimals": "2-4",
+    "note": "ACAP is planned as a divisible token. The technical token can use 18 decimals; user-facing UI may display 2-4 decimals for readability."
+  },
+  "minting": {
+    "unlimited_mint": false,
+    "hard_cap": 1000000000,
+    "reserve_release_rule": "Any reserve release must be transparent and documented in the changelog.",
+    "future_controls": "Future contract changes must require multisig / timelock / governance when implemented."
+  },
+  "disclaimers": [
+    "ACAP tokenomics are draft / preview and may change before final launch.",
+    "No public mainnet token sale is active. No reservation is open.",
+    "This page is not investment advice. Tiered reservation pricing is a capacity mechanism, not a profit promise.",
+    "ACAP is presented as a utility / capacity token design.",
+    "Active Capacity Reservation is not a fixed-term lease: ACAP remains yours while held; nothing expires or is confiscated.",
+    "No custody, trading, bridge, payments, public rewards or public mainnet are live.",
+    "Numbers can change before final launch and will be versioned in the changelog.",
+    "No on-chain contract is deployed; no contract address is published."
+  ],
+  "changelog": [
+    {"version": "0.2.0-preview", "date": "2026-06-25", "change": "Reworked to the Active Capacity Reservation model (owner rejected fixed-term lease wording): no fixed term, ACAP remains the holder's, active-capacity status depends on movement/node/participation, inactive ACAP not confiscated. Added Pool 1 (1,000,000 ACAP, tiered $0.001-$0.003), pricing_tiers, active_capacity_model. Rounds: 1M planned / 4M draft / 20M draft. reservation_active=false, available_for_reservation=0."},
+    {"version": "0.1.0-preview", "date": "2026-06-25", "change": "Initial preview tokenomics registry: 1,000,000,000 ACAP hard cap, 18 decimals, 7-way allocation draft. Sale disabled, circulating 0, available 0."}
+  ]
+}

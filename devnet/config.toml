@@ -1,0 +1,15 @@
+# ACAP local private-devnet - NON-PRODUCTION LAB config.
+# RPC binds loopback only. P2P/discovery DISABLED (single validator needs no peers).
+# No public RPC, no public P2P, no mainnet, no rewards.
+rpc-http-enabled=true
+rpc-http-host="127.0.0.1"
+rpc-http-port=8545
+rpc-http-api=["ETH","NET","QBFT","WEB3"]
+rpc-http-cors-origins=["none"]
+host-allowlist=["127.0.0.1"]
+# --- P2P loopback-only posture: fully disabled for the single-validator lab ---
+p2p-enabled=false
+discovery-enabled=false
+p2p-interface="127.0.0.1"
+# p2p-port=30303  (NOT bound while p2p-enabled=false; kept for reference)
+min-gas-price=0

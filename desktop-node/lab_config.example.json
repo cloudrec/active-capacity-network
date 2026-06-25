@@ -1,0 +1,12 @@
+{
+  "_comment": "Copy to data/lab_config.json ONLY on your own lab machine to enable local devnet status. Never on a server.",
+  "network": "acap-private-devnet",
+  "mainnet": false,
+  "chain_id": 469469,
+  "rpc_url": "http://127.0.0.1:8545",
+  "rpc_bind_warning": "RPC must bind 127.0.0.1 or your Tailscale IP only — never 0.0.0.0 / public.",
+  "role": "validator-or-rpc",
+  "besu_home": "%USERPROFILE%\\besu",
+  "start_command": "see ACAP_DESKTOP_NODE_DEVNET_LAB.md (Besu QBFT bring-up) — sourced from /opt/diamond/auction/blockchain",
+  "source_defs": "auction blockchain/ QBFT genesis + static-nodes + docker-compose.single-host.yml"
+}

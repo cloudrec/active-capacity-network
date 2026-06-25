@@ -1,0 +1,90 @@
+name: checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  safety:
+    name: Safety + validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Secret scan (no private keys / .env / credentials)
+        run: python3 scripts/check_no_secrets.py
+
+      - name: Claim scan (no live mainnet/rewards/custody/trading/sale)
+        run: python3 scripts/check_claims.py
+
+      - name: Tokenomics + JSON + release verify
+        run: python3 scripts/verify_release.py
+
+      - name: Validate all JSON files
+        run: |
+          python3 - <<'PY'
+          import json, sys, pathlib
+          skip = {".git","node_modules","bin","obj","__pycache__"}
+          bad = 0
+          for p in pathlib.Path(".").rglob("*.json"):
+              if set(p.parts) & skip: continue
+              try: json.loads(p.read_text(encoding="utf-8"))
+              except Exception as e:
+                  print(f"INVALID JSON {p}: {e}"); bad += 1
+          sys.exit(1 if bad else 0)
+          PY
+
+  scripts-static:
+    name: PowerShell / BAT static checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: PowerShell static analysis (PSScriptAnalyzer)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+          $files = Get-ChildItem -Recurse -Include *.ps1 -File |
+                   Where-Object { $_.FullName -notmatch '[\\/](bin|obj|node_modules)[\\/]' }
+          if (-not $files) { Write-Host "no .ps1 files"; exit 0 }
+          $errors = 0
+          foreach ($f in $files) {
+            $res = Invoke-ScriptAnalyzer -Path $f.FullName -Severity Error
+            if ($res) { $res | Format-Table -AutoSize | Out-String | Write-Host; $errors += $res.Count }
+          }
+          if ($errors -gt 0) { Write-Error "PSScriptAnalyzer found $errors error(s)"; exit 1 }
+          Write-Host "PowerShell static checks passed"
+
+      - name: BAT non-HTTPS download guard
+        run: |
+          set -e
+          if grep -rniE 'http://[^ "'"'"')]+' --include='*.bat' --include='*.ps1' . \
+               | grep -viE '127\.0\.0\.1|localhost|0\.0\.0\.0|schemas|example\.com|#' ; then
+            echo "Found non-HTTPS URL in scripts"; exit 1
+          fi
+          echo "no plaintext-HTTP download URLs in scripts"
+
+  markdown:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        continue-on-error: true
+        with:
+          globs: "**/*.md"

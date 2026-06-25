@@ -1,0 +1,4 @@
+[
+  "_comment: OPTIONAL. Single-validator one-click devnet needs NO static nodes (peers=0 is normal).",
+  "_comment: For a multi-validator LAB only, add enode://<pubkey>@127.0.0.1:<p2p-port> entries here."
+]

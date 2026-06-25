@@ -1,0 +1,17 @@
+================ NON-PRODUCTION LAB DEVNET KEYS — READ ME ================
+
+The validator key(s) in validators/validator-*/key are FRESH, LAB-ONLY keys
+generated for a LOCAL PRIVATE DEVNET. They are:
+
+  * NOT the auction/production blockchain's validator keys
+  * NOT your user wallet keys
+  * NOT funded with any real value
+  * safe to discard / regenerate at any time
+
+DO NOT:
+  * reuse these keys on any public or production network
+  * expose the devnet RPC beyond 127.0.0.1
+  * treat this devnet as mainnet, rewards, mining, staking, or custody
+
+This bundle is for local experimentation only. No mainnet. No rewards. No trading.
+=========================================================================
