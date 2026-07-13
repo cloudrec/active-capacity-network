@@ -194,6 +194,27 @@ signed node enrolment + validator pilot readiness**, and the **ACAP Stage 8B val
 admission preview workflow**, and the **ACAP Stage 8C validator pilot activation readiness**
 are **DONE — do not rebuild them.**
 
+**ACAP Stage 8D — Durable Governance State + Activation Manifest Integrity — COMPLETE:** all
+ACAP governance state now lives in a durable transactional store (SQLite WAL / foreign keys /
+synchronous FULL / secure permissions). Every protocol transition (proof verification, observer
+registration, key rotation, revocation, admission decision, activation evidence) commits in ONE
+transaction — atomic, fail-closed, no half-state. DB-enforced invariants: one active key
+fingerprint, single-use challenge nonce, unique idempotency key, observer/candidate voting power
+stays 0. The identity audit is a per-stream, fork-proof hash chain (monotonic sequence + linked
+hashes, appended under one serialized transaction) with a machine-readable integrity report.
+The authoritative node registry is NOT forked and there is no silent fallback to the old JSON. A
+verified migration tool (preflight / dry-run / migrate / verify / rollback) snapshots the legacy
+JSON immutably and imports it in a single transaction with count + chain parity checks. An
+immutable, hashed ACTIVATION MANIFEST binds rehearsals and owner sign-offs; any change to the key,
+software/build, policy, incidents, proposed voting power, or power distribution makes them stale.
+Production four-eyes is hardened: an owner override never satisfies the production activation gate,
+a single-owner deployment stays production NO-GO, and the recorded actor is the server-derived
+authenticated principal (the request body cannot spoof it). Regardless of outcome the activation
+request is inert, the node stays observer with zero voting power, and admission is disabled +
+paused. This is the unblocked internal track; next is Stage 8E / Stage 9 preparation (multi-
+operator governance identities, an isolated consensus lab, independent security-review prep) — no
+consensus started, no mainnet claimed. Not live.
+
 **ACAP Stage 8C — Validator Pilot Activation Readiness — COMPLETE:** the gates + evidence +
 rehearsal that would have to be GREEN before an approved-preview proposal could — in a future,
 SEPARATE, owner-gated action — become a live validator. Twelve fail-closed gates (approved-
@@ -282,4 +303,4 @@ The intended progression is:
 
 Start a new chat with:
 
-> Continue ACAP Network + 469 Diamond Auction. Read `docs/PROJECT_STATE_AND_HANDOFF.md` in `cloudrec/active-capacity-network` first. The Alembic repair, Settlement Engine V1, Secondary Market V1, Liquidity Readiness V1, the strict-schema guard, the PostgreSQL rehearsal and the PSP verification harness are DONE — do not rebuild them. The next active task is Stage 6B (Production Operations Readiness). Do not ask me to repeat project history. Do not restore old reports. Always backup first. No production cutover or real payments without explicit owner confirmation.
+> Continue ACAP Network + 469 Diamond Auction. Read `docs/PROJECT_STATE_AND_HANDOFF.md` in `cloudrec/active-capacity-network` first. The Alembic repair, Settlement Engine V1, Secondary Market V1, Liquidity Readiness V1, the strict-schema guard, the PostgreSQL rehearsal, the PSP verification harness, the Stage 6B/6C/6D provider tooling, and ACAP Stages 8A (signed enrolment), 8B (admission preview), 8C (activation readiness) and 8D (durable governance store + activation manifest integrity) are DONE — do not rebuild them. The unblocked internal track is at Stage 8D; the next direction is Stage 8E / Stage 9 preparation (multi-operator governance identities, an isolated consensus lab, independent security-review prep) — do NOT start consensus or claim mainnet. Validator admission stays disabled + paused, activation stays NO-GO + inert, nodes stay observer with zero voting power. Do not ask me to repeat project history. Do not restore old reports. Always backup first. No production cutover or real payments without explicit owner confirmation.

@@ -95,4 +95,16 @@ operator explicitly registers the node as an observer. Key rotation uses a dual-
 (old + new) challenge; lost-key recovery is admin-gated with a cooldown; revocation
 immediately blocks further use.
 
+## Governance state durability (Stage 8D)
+
+Node identity, enrolments, keys, challenges, the identity audit, admission proposals and
+activation evidence are held in a durable, transactional governance store rather than loose
+files. Each enrolment/rotation/revocation step commits atomically (a crash never leaves a
+half-written state), a challenge nonce can be consumed only once, one active key fingerprint
+can bind to only one node, and the identity audit is a fork-proof, per-stream hash chain you
+can verify. The server still stores only your PUBLIC key + fingerprint — never a private key,
+and never the raw challenge nonce. None of this activates a validator, grants voting power, or
+starts consensus; validator admission stays disabled + paused and every node stays an observer
+with zero voting power.
+
 Everything here is private preview / readiness. No mainnet, rewards, or live consensus.

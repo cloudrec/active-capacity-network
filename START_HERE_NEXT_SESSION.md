@@ -6,7 +6,7 @@ Read these files in order:
 2. [`docs/MASTER_ROADMAP_TO_PRODUCTION.md`](docs/MASTER_ROADMAP_TO_PRODUCTION.md) — where the project is going and production gates.
 3. [`README.md`](README.md) — public ACAP preview posture.
 
-Last updated: 2026-07-13 (Stage 6D).
+Last updated: 2026-07-13 (Stage 8D).
 
 ## Completed (do NOT rebuild)
 
@@ -61,6 +61,24 @@ Last updated: 2026-07-13 (Stage 6D).
   blocked with `live_activation_is_a_separate_owner_gated_action`). Nothing here activates a
   validator, changes a node's role, or grants voting power. Not live — no mainnet, rewards, or
   consensus.
+- **ACAP Stage 8D — Durable Governance State + Activation Manifest Integrity V1:** all ACAP
+  governance state moved into a durable transactional store (SQLite WAL / foreign keys /
+  synchronous FULL / secure permissions) — atomic multi-collection transitions, fail-closed on
+  corruption, DB-enforced uniqueness (one active key fingerprint, single-use challenge nonce,
+  idempotency), and a fork-proof per-stream hash-chained identity audit. The authoritative node
+  registry is NOT forked and there is no silent fallback to the old JSON. A verified migration
+  tool (preflight / dry-run / migrate / verify / rollback) snapshots the legacy JSON immutably
+  and imports it in one transaction with count + chain parity checks. An immutable, hashed
+  ACTIVATION MANIFEST binds rehearsals and owner sign-offs; any change to the key, software/build,
+  policy, incidents, proposed voting power, or power distribution makes them stale. Production
+  four-eyes is hardened: an owner override never satisfies the production activation gate, a
+  single-owner deployment stays production NO-GO, and the recorded actor is the server-derived
+  authenticated principal (the request body cannot spoof it). Activation stays NO-GO by default
+  and the activation request is always inert — nothing activates a validator, admission stays
+  disabled + paused, observer / zero voting power. This is the unblocked internal track; the next
+  direction is Stage 8E / Stage 9 preparation (multi-operator governance identities, an isolated
+  consensus lab, and independent security-review preparation) — WITHOUT starting consensus or
+  claiming mainnet. Not live — no mainnet, rewards, or consensus.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 

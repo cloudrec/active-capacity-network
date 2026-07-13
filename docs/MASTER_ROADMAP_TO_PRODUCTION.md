@@ -91,8 +91,10 @@ Production gates:
 
 **COMPLETED V1.** Alembic chain repaired (single head, proven on disposable PostgreSQL +
 SQLite, Numeric types + row preservation verified). Plus strict-schema startup guard,
-PostgreSQL cutover rehearsal, and PSP signed-fixture verification harness. See Stage 6B
-below for the current active stage.
+PostgreSQL cutover rehearsal, and PSP signed-fixture verification harness. Stage 6B/6C/6D
+tooling is COMPLETE; the current unblocked internal track has advanced through ACAP Stages
+8A–8D (see below). The next direction is Stage 8E / Stage 9 preparation — no consensus, no
+mainnet.
 
 Delivered:
 - Settlement Engine with payment/settlement separation;
@@ -152,6 +154,20 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
 - [x] Four-eyes (approver != creator/proposer) + audited owner override, all preview-only; a
   proposal never admits a validator, grants voting power, or changes observer/vp0 state
 - These (8A/8B) are the unblocked internal track. Stage 7 (custody/reserve/verification/legal) remains blocked.
+
+**ACAP Stage 8D — Durable Governance State + Activation Manifest Integrity — COMPLETED:**
+- [x] Durable transactional governance store (SQLite WAL / FK / synchronous FULL / secure
+      permissions): atomic transitions, fail-closed on corruption, DB-enforced uniqueness
+      (one active fingerprint, single-use nonce, idempotency), fork-proof per-stream hash-chained
+      audit. Authoritative registry not forked; no silent JSON fallback.
+- [x] Verified JSON→store migration (preflight / dry-run / migrate / verify / rollback); legacy
+      JSON snapshotted immutable; count + chain parity checked.
+- [x] Immutable hashed activation manifest; rehearsals + owner sign-offs bind to it; any change
+      to key / build / policy / incidents / voting power / distribution makes them stale.
+- [x] Production four-eyes hardened (owner override never satisfies production; single-owner stays
+      NO-GO); server-derived actor identity (no body spoofing); activation still NO-GO + inert.
+- [x] Next direction: Stage 8E / Stage 9 preparation (multi-operator governance identities,
+      isolated consensus lab, independent security-review prep) — no consensus, no mainnet.
 
 **ACAP Stage 8C — Validator Pilot Activation Readiness — COMPLETED:**
 - [x] Twelve fail-closed activation gates (approved-preview reached, four-eyes/override
