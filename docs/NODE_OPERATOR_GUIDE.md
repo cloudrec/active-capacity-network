@@ -67,3 +67,32 @@ Copy the examples and edit locally (never commit real values):
 
 See `desktop-node/TROUBLESHOOTING_WINDOWS_NODE.md` and
 `desktop-node/TROUBLESHOOTING_WINDOWS.md`.
+
+## Signed node enrolment (preview)
+
+ACAP supports a signed node enrolment protocol (`ACAP_NODE_ENROLMENT_V1`, Ed25519).
+
+What it is — and is not:
+
+- A valid signature proves **control of a private key ONLY**. It does **not** prove
+  identity, trustworthiness, uptime, location, hardware capacity, or validator eligibility.
+- A successful enrolment makes the node an **observer with zero voting power** — not a
+  validator, no rewards, no consensus membership, no mainnet.
+- Validator admission is a **separate, paused-by-default preview workflow**. No signature
+  ever creates a candidate or validator or grants voting power.
+
+Key safety:
+
+- The node generates its Ed25519 identity key **locally**. The private key is never sent
+  to the server, never logged, and never placed in a URL. The server stores only the
+  public key + fingerprint + status.
+- Do **not** reuse the node identity key as a wallet, payment, or consensus key. Back up
+  the local key file securely.
+
+Flow: request enrolment (public key + safe metadata) → receive a single-use, short-lived
+challenge → review and sign the exact payload locally → submit the signature → the
+operator explicitly registers the node as an observer. Key rotation uses a dual-signature
+(old + new) challenge; lost-key recovery is admin-gated with a cooldown; revocation
+immediately blocks further use.
+
+Everything here is private preview / readiness. No mainnet, rewards, or live consensus.

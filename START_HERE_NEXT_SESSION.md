@@ -28,6 +28,17 @@ Last updated: 2026-07-13 (Stage 6D).
   expiry/revocation; provider-specific operational gates; the cutover gate is split into
   `postgres_only` (no custody/PSP, payments stay off) vs `payments_enabled`, and never
   executes. Readiness only — no custody, reserves, legal title, live call, or value movement.
+- **ACAP Stage 8A — Signed Node Enrolment + Validator Pilot Readiness V1:** Ed25519
+  domain-separated challenge-response node enrolment. A valid signature proves control of
+  a private key ONLY — never identity, trust, uptime, capacity, or validator eligibility.
+  A successful enrolment makes the node an OBSERVER with zero voting power (not a validator,
+  no rewards, no consensus). Key rotation (dual-signature) / lost-key recovery (admin +
+  cooldown) / revocation, with an append-only hash-chained identity audit. Validator
+  admission is a SEPARATE paused-by-default preview workflow (operator-majority safety +
+  four-eyes) that never mutates a live validator set. A reference enrolment client keeps
+  the private key on the node (never transmitted). This is the unblocked internal track;
+  Stage 7 (custody/reserve/verification/legal providers) remains blocked. Not live — no
+  mainnet, rewards, or consensus.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 

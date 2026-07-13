@@ -136,7 +136,16 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
 - [x] Provider-specific operational gates; adapter capability contract; cutover gate split
   (`postgres_only` vs `payments_enabled`, never executes).
 
-**Owner-gated remainder (external actions):**
+**ACAP Stage 8A — Signed Node Enrolment + Validator Pilot Readiness — COMPLETED:**
+- [x] Ed25519 domain-separated challenge-response; signature proves key control ONLY
+- [x] Observer-only registration (zero voting power, not admitted, no rewards)
+- [x] Key rotation (dual-signature) / lost-key recovery (admin + cooldown) / revocation +
+  append-only hash-chained identity audit
+- [x] Validator admission = separate paused-by-default preview workflow (operator-majority
+  safety + four-eyes); never mutates a live validator set
+- Unblocked internal track. Stage 7 (custody/reserve/verification/legal) remains blocked.
+
+**Owner-gated remainder (external Auction actions):**
 - [ ] Off-host backup destination configured + timer enabled (confirm synced).
 - [ ] Real providers onboarded to OPERATIONAL readiness (non-demo → configured →
   capability-proven → independently-verified evidence with four-eyes → production_eligible).

@@ -189,8 +189,18 @@ The Alembic repair, Settlement Engine V1, Secondary Market Preview V1, Liquidity
 Redemption/Buyback Readiness V1, the strict-schema guard, the PostgreSQL cutover
 rehearsal, the PSP signed-fixture verification harness, the **Stage 6B
 production-operations tooling**, the **Stage 6C provider-onboarding interfaces**, and the
-**Stage 6D provider readiness-integrity + evidence governance** are **DONE — do not
-rebuild them.**
+**Stage 6D provider readiness-integrity + evidence governance**, and the **ACAP Stage 8A
+signed node enrolment + validator pilot readiness** are **DONE — do not rebuild them.**
+
+**ACAP Stage 8A — Signed Node Enrolment + Validator Pilot Readiness — COMPLETE:** Ed25519
+domain-separated challenge-response node enrolment. A valid signature proves control of a
+private key ONLY (never identity/trust/uptime/capacity/validator eligibility). A successful
+enrolment makes the node an OBSERVER with zero voting power (not a validator, no rewards, no
+consensus). Key rotation (dual-signature) / lost-key recovery (admin + cooldown) /
+revocation + append-only hash-chained identity audit. Validator admission is a SEPARATE
+paused-by-default preview workflow (operator-majority safety + four-eyes) that never mutates
+a live validator set. The node private key never leaves the node. Unblocked internal track;
+Stage 7 (custody/reserve/verification/legal providers) remains blocked. Not live.
 
 **Stage 6D — Provider Readiness Integrity + Evidence Governance — COMPLETE:** fixes the
 Stage-6C defect where `active_registered` (administrative) was treated as operational
