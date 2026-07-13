@@ -6,7 +6,7 @@ Read these files in order:
 2. [`docs/MASTER_ROADMAP_TO_PRODUCTION.md`](docs/MASTER_ROADMAP_TO_PRODUCTION.md) — where the project is going and production gates.
 3. [`README.md`](README.md) — public ACAP preview posture.
 
-Last updated: 2026-07-13 (Stage 6A closure).
+Last updated: 2026-07-13 (Stage 6B).
 
 ## Completed (do NOT rebuild)
 
@@ -15,6 +15,10 @@ Last updated: 2026-07-13 (Stage 6A closure).
 - Strict-schema startup guard V1.
 - PostgreSQL cutover rehearsal V1.
 - PSP signed-fixture verification harness V1.
+- **Stage 6B — Production Operations Readiness V1:** unified ops-status monitoring
+  (schema drift + backup freshness + off-host + provider readiness), alert dispatcher
+  (disabled by default, no secrets), readiness-only provider-integration interfaces,
+  cutover go/no-go gate (never executes), DR/ops docs. Off-host framework audited.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 
@@ -29,12 +33,19 @@ There is **no open Alembic failure** and **no open "build Settlement Engine" tas
 - **Off-host backup:** not configured. **Custody:** not integrated. **Legal review:** not
   completed. **Reserve attestation:** not integrated.
 
-## Next active task
+## Next active task — OWNER-GATED external actions
 
-**Stage 6B — Production Operations Readiness:** off-host backup framework, monitoring and
-alerting, disaster-recovery runbooks, provider integration interfaces, and owner-gated
-PostgreSQL/PSP cutover preparation. No production cutover, real payment, or real-money
-movement without a separate, explicit owner confirmation.
+Stage 6B tooling is complete. What remains needs the owner (no build work is unblocked
+without these):
+1. Configure an off-host backup destination + enable its timer (confirm synced).
+2. Onboard providers (custody, reserve attestation, legal review) and register real adapters.
+3. Provide real WayForPay + Plisio sandbox credentials + one confirmed callback each.
+4. Provision production PostgreSQL; run the cutover rehearsal + go/no-go gate (must be GO);
+   then the owner-approved cutover (set the production database URL; drop the temporary
+   create mode so the schema guard resolves to strict).
+
+No production cutover, real payment, or real-money movement without a separate, explicit
+owner confirmation.
 
 ## Do NOT
 
@@ -49,7 +60,8 @@ Continue ACAP Network + 469 Diamond Auction.
 Read START_HERE_NEXT_SESSION.md and docs/PROJECT_STATE_AND_HANDOFF.md in cloudrec/active-capacity-network before answering.
 Do not ask me to repeat project history.
 Settlement Engine V1, Secondary Market V1, Liquidity Readiness V1, the Alembic repair,
-the strict-schema guard, the PostgreSQL rehearsal and the PSP verification harness are
-DONE — do not rebuild them. Continue with Stage 6B (Production Operations Readiness).
+the strict-schema guard, the PostgreSQL rehearsal, the PSP verification harness and the
+Stage 6B production-operations tooling are DONE — do not rebuild them. What remains is
+owner-gated (off-host destination, provider onboarding, PostgreSQL/PSP cutover).
 No production cutover or real payments without explicit owner confirmation.
 ```

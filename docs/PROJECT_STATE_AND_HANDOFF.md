@@ -187,22 +187,24 @@ Always rerun current tests; do not treat these historical counts as current proo
 
 The Alembic repair, Settlement Engine V1, Secondary Market Preview V1, Liquidity/
 Redemption/Buyback Readiness V1, the strict-schema guard, the PostgreSQL cutover
-rehearsal and the PSP signed-fixture verification harness are **DONE — do not rebuild
-them.**
+rehearsal, the PSP signed-fixture verification harness, and the **Stage 6B
+production-operations tooling** are **DONE — do not rebuild them.**
 
-**Stage 6B — Production Operations Readiness.** Required scope:
+**Stage 6B — Production Operations Readiness — tooling COMPLETE:** unified ops-status
+monitoring (schema drift + backup freshness + off-host + provider readiness), an alert
+dispatcher (disabled by default, redacted, no secrets), readiness-only
+provider-integration interfaces (custody / reserve attestation / legal review / PSP
+real-sandbox onboarding), a cutover go/no-go gate (never executes), and DR/ops docs.
+Off-host backup framework audited + confirmed.
 
-1. Off-host backup framework (encrypted, owner-configured destination).
-2. Monitoring + alerting (service health, schema drift, error rates).
-3. Disaster-recovery runbooks (backup/restore, rollback, incident response).
-4. Provider integration interfaces (custody, reserve attestation, legal review, PSP
-   real-sandbox onboarding).
-5. Owner-gated PostgreSQL cutover preparation:
-   - provision production PostgreSQL; run the cutover rehearsal;
-   - owner-approved cutover; remove the temporary explicit create mode so production
-     resolves to strict; verify the startup guard at head;
-   - obtain real WayForPay + Plisio sandbox credentials + one confirmed callback each to
-     move real sandbox E2E off `blocked_external`.
+**Next active task — OWNER-GATED external actions** (no build unblocked without these):
+
+1. Configure an off-host backup destination + enable its timer (confirm synced).
+2. Onboard + register real provider adapters (custody, reserve attestation, legal review).
+3. Real WayForPay + Plisio sandbox credentials + one confirmed callback each.
+4. Provision production PostgreSQL; run the cutover rehearsal + the go/no-go gate (must be
+   GO); then the owner-approved cutover (set the production DB URL; remove the temporary
+   explicit create mode so the guard resolves to strict; verify at head).
 
 Everything stays Preview/Readiness. No production cutover, real payment, custody, legal
 title, real transfer or guaranteed liquidity without a separate, explicit owner

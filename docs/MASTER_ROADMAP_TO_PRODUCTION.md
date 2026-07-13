@@ -117,17 +117,23 @@ mode flagged as a production blocker); PostgreSQL cutover rehearsal toolkit
 harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbox E2E
 `blocked_external`); a callback can never complete settlement.
 
-**Stage 6B — Production Operations Readiness (current active stage):**
-- Off-host backup framework (encrypted, owner-configured destination).
-- Monitoring + alerting; disaster-recovery runbooks.
-- Provider integration interfaces (custody, reserve attestation, legal review, PSP
-  real-sandbox onboarding).
-- Owner-gated PostgreSQL cutover prep: provision production PostgreSQL; run the rehearsal;
+**Stage 6B — Production Operations Readiness — tooling COMPLETED:**
+- [x] Unified ops-status monitoring (service health, schema drift, backup freshness,
+  off-host, provider readiness, disk) + CLI + admin endpoint.
+- [x] Alert dispatcher (disabled by default, redacted, no secrets) + systemd templates.
+- [x] Disaster-recovery + operations runbook.
+- [x] Readiness-only provider integration interfaces (custody, reserve attestation,
+  legal review, PSP real-sandbox onboarding).
+- [x] Cutover go/no-go gate (never executes). Off-host backup framework audited.
+
+**Owner-gated remainder (external actions):**
+- [ ] Off-host backup destination configured + timer enabled (confirm synced).
+- [ ] Real provider adapters onboarded + registered (custody, reserve, legal).
+- [ ] Provision production PostgreSQL; run the rehearsal + go/no-go gate (must be GO);
   owner-approved cutover; remove the temporary create mode so production resolves to
   strict; verify the guard at head; Numeric-at-rest verification after cutover.
-- WayForPay/Plisio real sandbox callback proof; signature canonicalisation verified
-  against provider evidence; idempotency + reconciliation proof; refund/chargeback
-  operating procedures.
+- [ ] WayForPay/Plisio real sandbox callback proof; idempotency + reconciliation proof;
+  refund/chargeback operating procedures.
 
 No production cutover or real payments without a separate, explicit owner confirmation.
 
