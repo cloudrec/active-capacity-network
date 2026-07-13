@@ -114,20 +114,24 @@ Implemented in Auction:
 
 ## 4. Current technical debt and blockers
 
-### Critical technical blocker before more production DB work
-The complete Alembic chain on a fresh PostgreSQL database has previously failed at revision:
+### Alembic chain — RESOLVED
+The fresh-PostgreSQL Alembic failure at `a1b2c3d4e5f6` (Float→Numeric of money columns,
+including `payment_attempt_logs.amount` / `payment_webhook_events.amount`) is **fixed**.
+Root cause: the baseline predated two payment tables that only existed via
+`create_all`. The migration is now introspective/idempotent + a corrective migration
+creates the missing tables. Single head, proven on disposable PostgreSQL (fresh /
+staging-like / already-Numeric / downgrade) + SQLite, plus a full backup/restore/migrate/
+rollback rehearsal. Settlement/Secondary Market/Liquidity tables are added on top. This is
+no longer a blocker.
 
-`a1b2c3d4e5f6_money_float_to_numeric.py`
-
-The failure concerns Float/double-precision to Numeric conversion of money columns, including:
-- `payment_attempt_logs.amount`
-- `payment_webhook_events.amount`
-
-The latest task requires reproducing and safely fixing this migration before adding Settlement/Secondary Market tables.
-
-### External/owner-dependent blockers
-- Off-host backup destination credentials/target not fully configured.
-- WayForPay/Plisio sandbox callbacks not independently confirmed.
+### External/owner-dependent blockers (open)
+- Production PostgreSQL not provisioned (rehearsal passed; production not switched).
+- Live runtime is SQLite on an explicit temporary create mode (`legacy_explicit_create`)
+  until the owner-gated cutover — surfaced as a production blocker.
+- Off-host backup destination not configured.
+- WayForPay/Plisio real sandbox E2E `blocked_external` (owner creds + one confirmed
+  callback per provider required). The `mock` provider is local-fixture only.
+- Custody, legal review and reserve attestation not integrated.
 - Production PostgreSQL host/cutover not approved.
 - Custody provider not integrated.
 - Jurisdiction-specific legal review not complete.
@@ -181,36 +185,28 @@ Always rerun current tests; do not treat these historical counts as current proo
 
 ## 8. NEXT ACTIVE TASK
 
-**Repair the full PostgreSQL Alembic chain, then implement Settlement Engine V1 + Secondary Market Preview V1 + Liquidity/Redemption/Buyback Readiness V1.**
+The Alembic repair, Settlement Engine V1, Secondary Market Preview V1, Liquidity/
+Redemption/Buyback Readiness V1, the strict-schema guard, the PostgreSQL cutover
+rehearsal and the PSP signed-fixture verification harness are **DONE — do not rebuild
+them.**
 
-Required sequence:
+**Stage 6B — Production Operations Readiness.** Required scope:
 
-1. Create verified full backups.
-2. Reproduce fresh PostgreSQL `alembic upgrade head` failure.
-3. Fix `a1b2c3d4e5f6` safely:
-   - inspect table/column/current type;
-   - alter only Float/real/double precision;
-   - explicit PostgreSQL `USING ...::numeric(...)`;
-   - skip already-Numeric;
-   - preserve rows/defaults/indexes;
-   - test fresh PostgreSQL, existing-like PostgreSQL, SQLite and downgrade/re-upgrade.
-4. Verify exact types:
-   - money: `NUMERIC(20,2)`;
-   - token quantities: `NUMERIC(30,8)`;
-   - issuance supply: `NUMERIC(38,0)`.
-5. Build Settlement Engine with strict payment/settlement separation.
-6. Build explicit platform ownership-record action; no legal-title claim.
-7. Build preview-only secondary listing/offer/matching with deterministic price-time priority.
-8. Build redemption, buyback policy, reserve and market-maker readiness models.
-9. Append servicing events.
-10. Add Smart Block readiness simulations.
-11. Add APIs, frontend, migrations and tests.
-12. Keep everything Preview/Readiness; no real payment, custody, transfer or guaranteed liquidity.
+1. Off-host backup framework (encrypted, owner-configured destination).
+2. Monitoring + alerting (service health, schema drift, error rates).
+3. Disaster-recovery runbooks (backup/restore, rollback, incident response).
+4. Provider integration interfaces (custody, reserve attestation, legal review, PSP
+   real-sandbox onboarding).
+5. Owner-gated PostgreSQL cutover preparation:
+   - provision production PostgreSQL; run the cutover rehearsal;
+   - owner-approved cutover; remove the temporary explicit create mode so production
+     resolves to strict; verify the startup guard at head;
+   - obtain real WayForPay + Plisio sandbox credentials + one confirmed callback each to
+     move real sandbox E2E off `blocked_external`.
 
-Expected final paths for the active task:
-- `/opt/capacity/docs/ACAP_SETTLEMENT_SECONDARY_MARKET_LIQUIDITY_V1.md`
-- `/opt/capacity/reports/ACAP_SETTLEMENT_LIQUIDITY_ARCHITECTURE_V1_FINAL_REPORT.md`
-- `/opt/diamond/auction/reports/AUCTION_SETTLEMENT_SECONDARY_MARKET_V1_FINAL_REPORT.md`
+Everything stays Preview/Readiness. No production cutover, real payment, custody, legal
+title, real transfer or guaranteed liquidity without a separate, explicit owner
+confirmation.
 
 ## 9. Longer-term destination
 
@@ -220,9 +216,9 @@ The intended progression is:
 2. Digital Asset Lifecycle Engine — completed V1.
 3. Smart Blocks Runtime — completed V1.
 4. RWA Issuance Engine — completed V1.
-5. Settlement + Secondary Market + Liquidity Readiness — active next step.
-6. PSP sandbox proof and payment reconciliation hardening.
-7. Production PostgreSQL provisioning/cutover after backup and migration proof.
+5. Settlement + Secondary Market + Liquidity Readiness — completed V1.
+6. Strict-schema guard + PostgreSQL cutover rehearsal + PSP signed-fixture harness — completed V1.
+7. Stage 6B production operations readiness (backup/monitoring/DR/provider interfaces), then owner-gated Production PostgreSQL + PSP real-sandbox cutover.
 8. Custody and verification-provider integrations.
 9. Signed node enrolment and partner-validator pilot.
 10. Safe consensus laboratory and audited pilot chain.
@@ -232,4 +228,4 @@ The intended progression is:
 
 Start a new chat with:
 
-> Continue ACAP Network + 469 Diamond Auction. Read `docs/PROJECT_STATE_AND_HANDOFF.md` in `cloudrec/active-capacity-network` first. The next active task is the PostgreSQL Alembic chain repair followed by Settlement Engine V1 + Secondary Market/Liquidity Readiness. Do not ask me to repeat project history. Do not restore old reports. Always backup first.
+> Continue ACAP Network + 469 Diamond Auction. Read `docs/PROJECT_STATE_AND_HANDOFF.md` in `cloudrec/active-capacity-network` first. The Alembic repair, Settlement Engine V1, Secondary Market V1, Liquidity Readiness V1, the strict-schema guard, the PostgreSQL rehearsal and the PSP verification harness are DONE — do not rebuild them. The next active task is Stage 6B (Production Operations Readiness). Do not ask me to repeat project history. Do not restore old reports. Always backup first. No production cutover or real payments without explicit owner confirmation.

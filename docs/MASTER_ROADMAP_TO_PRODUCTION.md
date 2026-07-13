@@ -89,14 +89,12 @@ Production gates:
 
 ## Stage 5 — Settlement, Secondary Market and Liquidity Readiness
 
-**Current active stage.**
+**COMPLETED V1.** Alembic chain repaired (single head, proven on disposable PostgreSQL +
+SQLite, Numeric types + row preservation verified). Plus strict-schema startup guard,
+PostgreSQL cutover rehearsal, and PSP signed-fixture verification harness. See Stage 6B
+below for the current active stage.
 
-First unblock PostgreSQL:
-- repair the full Alembic chain at `a1b2c3d4e5f6`;
-- prove fresh PostgreSQL and SQLite upgrades;
-- verify Numeric types and row preservation.
-
-Then implement:
+Delivered:
 - Settlement Engine with payment/settlement separation;
 - explicit ownership platform-record action;
 - reconciliation, refund, chargeback and dispute readiness;
@@ -112,14 +110,26 @@ No live market, transfer, reserve, buyback or liquidity guarantee is allowed in 
 
 ## Stage 6 — Payment and database production readiness
 
-- WayForPay/Plisio real sandbox callback proof.
-- Signature canonicalisation verified against provider evidence.
-- Idempotency and reconciliation proof.
-- Refund and chargeback operating procedures.
-- Provision production PostgreSQL.
-- Verified off-host backup before cutover.
-- Maintenance window and rollback rehearsal.
-- Numeric-at-rest verification after cutover.
+Stage 6A (COMPLETED): strict Alembic-controlled schema startup (production/staging ⇒
+strict regardless of dialect; the live SQLite runtime is on an explicit temporary create
+mode flagged as a production blocker); PostgreSQL cutover rehearsal toolkit
+(backup/restore/migrate/rollback on a disposable DB); PSP signed-fixture verification
+harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbox E2E
+`blocked_external`); a callback can never complete settlement.
+
+**Stage 6B — Production Operations Readiness (current active stage):**
+- Off-host backup framework (encrypted, owner-configured destination).
+- Monitoring + alerting; disaster-recovery runbooks.
+- Provider integration interfaces (custody, reserve attestation, legal review, PSP
+  real-sandbox onboarding).
+- Owner-gated PostgreSQL cutover prep: provision production PostgreSQL; run the rehearsal;
+  owner-approved cutover; remove the temporary create mode so production resolves to
+  strict; verify the guard at head; Numeric-at-rest verification after cutover.
+- WayForPay/Plisio real sandbox callback proof; signature canonicalisation verified
+  against provider evidence; idempotency + reconciliation proof; refund/chargeback
+  operating procedures.
+
+No production cutover or real payments without a separate, explicit owner confirmation.
 
 ## Stage 7 — Custody, verification and proof
 
