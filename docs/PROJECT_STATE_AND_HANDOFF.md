@@ -187,8 +187,9 @@ Always rerun current tests; do not treat these historical counts as current proo
 
 The Alembic repair, Settlement Engine V1, Secondary Market Preview V1, Liquidity/
 Redemption/Buyback Readiness V1, the strict-schema guard, the PostgreSQL cutover
-rehearsal, the PSP signed-fixture verification harness, and the **Stage 6B
-production-operations tooling** are **DONE — do not rebuild them.**
+rehearsal, the PSP signed-fixture verification harness, the **Stage 6B
+production-operations tooling**, and the **Stage 6C provider-onboarding interfaces** are
+**DONE — do not rebuild them.**
 
 **Stage 6B — Production Operations Readiness — tooling COMPLETE:** unified ops-status
 monitoring (schema drift + backup freshness + off-host + provider readiness), an alert
@@ -196,6 +197,12 @@ dispatcher (disabled by default, redacted, no secrets), readiness-only
 provider-integration interfaces (custody / reserve attestation / legal review / PSP
 real-sandbox onboarding), a cutover go/no-go gate (never executes), and DR/ops docs.
 Off-host backup framework audited + confirmed.
+
+**Stage 6C — Provider Onboarding Interfaces — COMPLETE:** auditable onboarding lifecycle
+(draft → … → active_registered) with hash-only evidence + tamper-evident event chain; a
+kind's provider readiness flips ready only when its onboarding is active_registered, and
+that reflects into production-readiness / ops-status / cutover-gate. Admin UI + API.
+Readiness only — no custody, reserve proof, legal title, live call, or value movement.
 
 **Next active task — OWNER-GATED external actions** (no build unblocked without these):
 

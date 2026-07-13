@@ -126,9 +126,15 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
   legal review, PSP real-sandbox onboarding).
 - [x] Cutover go/no-go gate (never executes). Off-host backup framework audited.
 
+**Stage 6C — Provider Onboarding Interfaces — COMPLETED:**
+- [x] Auditable onboarding lifecycle (draft → … → active_registered), hash-only evidence
+  + tamper-evident event chain; readiness flips into production-readiness / ops-status /
+  cutover-gate; admin UI + API. Readiness only.
+
 **Owner-gated remainder (external actions):**
 - [ ] Off-host backup destination configured + timer enabled (confirm synced).
-- [ ] Real provider adapters onboarded + registered (custody, reserve, legal).
+- [ ] Real providers onboarded + registered via the Stage-6C workflow (custody, reserve,
+  legal, PSP) — registering all four clears the cutover-gate providers gate.
 - [ ] Provision production PostgreSQL; run the rehearsal + go/no-go gate (must be GO);
   owner-approved cutover; remove the temporary create mode so production resolves to
   strict; verify the guard at head; Numeric-at-rest verification after cutover.

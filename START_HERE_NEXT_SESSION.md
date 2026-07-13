@@ -19,6 +19,11 @@ Last updated: 2026-07-13 (Stage 6B).
   (schema drift + backup freshness + off-host + provider readiness), alert dispatcher
   (disabled by default, no secrets), readiness-only provider-integration interfaces,
   cutover go/no-go gate (never executes), DR/ops docs. Off-host framework audited.
+- **Stage 6C — Provider Onboarding Interfaces V1:** auditable onboarding lifecycle
+  (draft → … → active_registered) with hash-only evidence + tamper-evident event chain;
+  a kind's provider readiness flips ready only when its onboarding is active_registered,
+  reflected into production-readiness / ops-status / cutover-gate. Admin UI + API.
+  Readiness only — no custody, reserve proof, legal title, live call, or value movement.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 
@@ -30,15 +35,18 @@ There is **no open Alembic failure** and **no open "build Settlement Engine" tas
   a production blocker (`legacy_explicit_create`) — not strict-ready.
 - **WayForPay / Plisio:** local verification harness ready; real sandbox E2E = `blocked_external`.
 - **PSP mock provider:** `local_fixture_only` (signed local fixture) — not a real provider E2E.
-- **Off-host backup:** not configured. **Custody:** not integrated. **Legal review:** not
-  completed. **Reserve attestation:** not integrated.
+- **Off-host backup:** not configured. **Providers:** onboarding workflow ready; all
+  kinds (custody / reserve attestation / legal review / PSP) still `not_integrated` until
+  onboarded + registered.
 
 ## Next active task — OWNER-GATED external actions
 
-Stage 6B tooling is complete. What remains needs the owner (no build work is unblocked
-without these):
+Stage 6B + 6C tooling is complete. What remains needs the owner (no build work is
+unblocked without these):
 1. Configure an off-host backup destination + enable its timer (confirm synced).
-2. Onboard providers (custody, reserve attestation, legal review) and register real adapters.
+2. Onboard real providers (custody, reserve attestation, legal review, PSP) through the
+   Stage-6C admin onboarding workflow: create → evidence → operator-review → approve →
+   verify → register. Registering all four kinds clears the cutover-gate providers gate.
 3. Provide real WayForPay + Plisio sandbox credentials + one confirmed callback each.
 4. Provision production PostgreSQL; run the cutover rehearsal + go/no-go gate (must be GO);
    then the owner-approved cutover (set the production database URL; drop the temporary
