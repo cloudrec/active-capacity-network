@@ -107,4 +107,15 @@ and never the raw challenge nonce. None of this activates a validator, grants vo
 starts consensus; validator admission stays disabled + paused and every node stays an observer
 with zero voting power.
 
+## Multi-operator governance identities (Stage 8E)
+
+Governance actions (proposing a validator candidate, approving it, signing off) are attributed
+to registered GOVERNANCE PRINCIPALS with separated roles (proposer / approver / owner sign-off /
+auditor). A principal authenticates with a bearer token issued server-side and shown once — only
+its hash is stored, never the token itself. Because a real production activation four-eyes now
+requires DISTINCT registered principals for the approver and owner sign-off (independent of the
+creator and proposer), a single operator acting alone stays production NO-GO. This is governance
+plumbing only: it never activates a validator, grants voting power, or starts consensus; every
+node stays an observer with zero voting power and validator admission stays disabled + paused.
+
 Everything here is private preview / readiness. No mainnet, rewards, or live consensus.

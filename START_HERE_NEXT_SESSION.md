@@ -6,7 +6,7 @@ Read these files in order:
 2. [`docs/MASTER_ROADMAP_TO_PRODUCTION.md`](docs/MASTER_ROADMAP_TO_PRODUCTION.md) — where the project is going and production gates.
 3. [`README.md`](README.md) — public ACAP preview posture.
 
-Last updated: 2026-07-13 (Stage 8D).
+Last updated: 2026-07-13 (Stage 8E).
 
 ## Completed (do NOT rebuild)
 
@@ -79,6 +79,21 @@ Last updated: 2026-07-13 (Stage 8D).
   direction is Stage 8E / Stage 9 preparation (multi-operator governance identities, an isolated
   consensus lab, and independent security-review preparation) — WITHOUT starting consensus or
   claiming mainnet. Not live — no mainnet, rewards, or consensus.
+- **ACAP Stage 8E — Multi-Operator Governance Identities V1:** a durable registry of governance
+  principals — the distinct, individually-authenticated operators who fill separated governance
+  roles (proposer / approver / owner sign-off / auditor). Each authenticates with a bearer token
+  generated server-side and shown ONCE; only its SHA-256 hash and a last-4 hint are stored — never
+  the token, a password, or any secret. Register / rotate-token / suspend / revoke are audit-logged
+  and a suspended or rotated token no longer authenticates. This makes the Stage-8D production
+  four-eyes REAL: the production activation gate now requires DISTINCT, ACTIVE, REGISTERED
+  principals for the approver and owner sign-off, independent of the creator and proposer — a
+  single-owner deployment stays production NO-GO and an owner override never satisfies it. The
+  acting identity is resolved server-side from a bearer token or the admin session (never the
+  request body, so it cannot be spoofed) and the admission and activation actions are attributed to
+  that principal. This is the unblocked internal track; the next direction is an isolated consensus
+  lab (sandboxed, never wired to the live preview) and independent security-review preparation —
+  WITHOUT starting consensus or claiming mainnet. Nothing here activates a validator, grants voting
+  power, or starts consensus. Not live.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 

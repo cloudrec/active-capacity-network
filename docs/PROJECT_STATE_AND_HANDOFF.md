@@ -194,6 +194,21 @@ signed node enrolment + validator pilot readiness**, and the **ACAP Stage 8B val
 admission preview workflow**, and the **ACAP Stage 8C validator pilot activation readiness**
 are **DONE — do not rebuild them.**
 
+**ACAP Stage 8E — Multi-Operator Governance Identities — COMPLETE:** a durable registry of
+governance principals — the distinct, individually-authenticated operators who fill separated
+governance roles (proposer / approver / owner sign-off / auditor / operator admin). Each
+authenticates with a bearer token generated server-side and shown ONCE; only its SHA-256 hash and
+a last-4 hint are stored — never the token, a password, or any secret. Register / rotate-token /
+suspend / revoke are audit-logged on the fork-proof identity chain, and a suspended, revoked or
+rotated token no longer authenticates. This makes the production activation four-eyes REAL: the
+gate now requires DISTINCT, ACTIVE, REGISTERED principals for the approver and owner sign-off,
+independent of the creator and proposer; a single-owner deployment stays production NO-GO and an
+owner override never satisfies it. The acting identity is resolved server-side from a bearer token
+or the admin session — never the request body, so it cannot be spoofed — and the admission and
+activation actions are attributed to that principal. Not live — nothing activates a validator,
+admission stays disabled + paused, observer / zero voting power. Next: an isolated consensus lab
+(sandboxed) and independent security-review preparation — no consensus started, no mainnet claimed.
+
 **ACAP Stage 8D — Durable Governance State + Activation Manifest Integrity — COMPLETE:** all
 ACAP governance state now lives in a durable transactional store (SQLite WAL / foreign keys /
 synchronous FULL / secure permissions). Every protocol transition (proof verification, observer
