@@ -36,9 +36,18 @@ Last updated: 2026-07-13 (Stage 6D).
   cooldown) / revocation, with an append-only hash-chained identity audit. Validator
   admission is a SEPARATE paused-by-default preview workflow (operator-majority safety +
   four-eyes) that never mutates a live validator set. A reference enrolment client keeps
-  the private key on the node (never transmitted). This is the unblocked internal track;
-  Stage 7 (custody/reserve/verification/legal providers) remains blocked. Not live — no
-  mainnet, rewards, or consensus.
+  the private key on the node (never transmitted). Not live — no mainnet, rewards, or consensus.
+- **ACAP Stage 8B — Validator Admission Preview Workflow V1:** a candidate-review →
+  validator-admission PREVIEW pipeline. Key-control proof is NECESSARY but never SUFFICIENT:
+  candidate readiness is a deterministic, fail-closed evaluation of policy inputs (software/
+  build policy, declared capacity, operator review, trust/reputation thresholds, incidents,
+  key age, recovery cooldown). The operator-majority (67% pilot) safety simulation blocks any
+  proposal that would drop the operator below the minimum; admission is disabled + paused by
+  default; partner-51 stays disabled. Four-eyes: the approver must differ from the creator and
+  proposer; a single-owner override is audited + preview-only. A proposal NEVER admits a
+  validator, grants voting power, or changes a node's observer/zero-voting-power state.
+  Stages 8A/8B are the unblocked internal track; Stage 7 (custody/reserve/verification/legal
+  providers) remains blocked. Not live — no mainnet, rewards, or consensus.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 

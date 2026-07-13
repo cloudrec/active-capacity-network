@@ -190,7 +190,18 @@ Redemption/Buyback Readiness V1, the strict-schema guard, the PostgreSQL cutover
 rehearsal, the PSP signed-fixture verification harness, the **Stage 6B
 production-operations tooling**, the **Stage 6C provider-onboarding interfaces**, and the
 **Stage 6D provider readiness-integrity + evidence governance**, and the **ACAP Stage 8A
-signed node enrolment + validator pilot readiness** are **DONE — do not rebuild them.**
+signed node enrolment + validator pilot readiness**, and the **ACAP Stage 8B validator
+admission preview workflow** are **DONE — do not rebuild them.**
+
+**ACAP Stage 8B — Validator Admission Preview Workflow — COMPLETE:** candidate-review →
+validator-admission PREVIEW. Key-control proof is necessary but never sufficient; candidate
+readiness is deterministic + fail-closed (software/build policy, declared capacity, operator
+review, trust/reputation thresholds, incidents, key age, recovery cooldown). The operator-
+majority (67% pilot) safety simulation blocks any proposal that would drop the operator below
+the minimum; admission is disabled + paused by default; partner-51 stays disabled. Four-eyes:
+the approver must differ from the creator and proposer; a single-owner override is audited +
+preview-only. A proposal NEVER admits a validator, grants voting power, or changes a node's
+observer/zero-voting-power state. Not live.
 
 **ACAP Stage 8A — Signed Node Enrolment + Validator Pilot Readiness — COMPLETE:** Ed25519
 domain-separated challenge-response node enrolment. A valid signature proves control of a

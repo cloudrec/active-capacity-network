@@ -143,7 +143,15 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
   append-only hash-chained identity audit
 - [x] Validator admission = separate paused-by-default preview workflow (operator-majority
   safety + four-eyes); never mutates a live validator set
-- Unblocked internal track. Stage 7 (custody/reserve/verification/legal) remains blocked.
+
+**ACAP Stage 8B — Validator Admission Preview Workflow — COMPLETED:**
+- [x] Candidate-review → admission PREVIEW state machine; deterministic fail-closed candidate
+  readiness (key-control necessary, NOT sufficient)
+- [x] Operator-majority (67%) safety simulation blocks unsafe proposals; disabled+paused by
+  default; partner-51 stays blocked
+- [x] Four-eyes (approver != creator/proposer) + audited owner override, all preview-only; a
+  proposal never admits a validator, grants voting power, or changes observer/vp0 state
+- These (8A/8B) are the unblocked internal track. Stage 7 (custody/reserve/verification/legal) remains blocked.
 
 **Owner-gated remainder (external Auction actions):**
 - [ ] Off-host backup destination configured + timer enabled (confirm synced).
