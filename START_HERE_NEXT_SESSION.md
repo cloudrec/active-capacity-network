@@ -48,6 +48,19 @@ Last updated: 2026-07-13 (Stage 6D).
   validator, grants voting power, or changes a node's observer/zero-voting-power state.
   Stages 8A/8B are the unblocked internal track; Stage 7 (custody/reserve/verification/legal
   providers) remains blocked. Not live — no mainnet, rewards, or consensus.
+- **ACAP Stage 8C — Validator Pilot Activation Readiness V1:** the gates + evidence +
+  rehearsal that would have to be GREEN before an approved-preview proposal could — in a
+  future, SEPARATE, owner-gated action — become a live validator. Twelve fail-closed gates
+  (approved-preview reached, four-eyes/override recorded, candidate readiness current, node
+  still observer / vp 0, key active, no incident, distribution safe [operator ≥67% / external
+  ≤33% / single ≤5%], admission enabled, admission unpaused, rehearsal passed, owner sign-off
+  recorded, cooldown elapsed). Admission is disabled + paused by default, so the activation
+  gate is **NO-GO by default**. A rehearsal is a pure dry-run projection that mutates no live
+  set; owner sign-off is a governance gate bound to the proposed voting power; and
+  `request_activation` is ALWAYS blocked and performs NO live change (even a fully-GO gate is
+  blocked with `live_activation_is_a_separate_owner_gated_action`). Nothing here activates a
+  validator, changes a node's role, or grants voting power. Not live — no mainnet, rewards, or
+  consensus.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 

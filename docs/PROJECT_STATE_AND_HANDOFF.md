@@ -191,7 +191,22 @@ rehearsal, the PSP signed-fixture verification harness, the **Stage 6B
 production-operations tooling**, the **Stage 6C provider-onboarding interfaces**, and the
 **Stage 6D provider readiness-integrity + evidence governance**, and the **ACAP Stage 8A
 signed node enrolment + validator pilot readiness**, and the **ACAP Stage 8B validator
-admission preview workflow** are **DONE — do not rebuild them.**
+admission preview workflow**, and the **ACAP Stage 8C validator pilot activation readiness**
+are **DONE — do not rebuild them.**
+
+**ACAP Stage 8C — Validator Pilot Activation Readiness — COMPLETE:** the gates + evidence +
+rehearsal that would have to be GREEN before an approved-preview proposal could — in a future,
+SEPARATE, owner-gated action — become a live validator. Twelve fail-closed gates (approved-
+preview reached, four-eyes/override recorded, candidate readiness current, node still observer
+/ vp 0, key active, no incident, distribution safe [operator ≥67% / external ≤33% / single
+≤5%], admission enabled, admission unpaused, rehearsal passed, owner sign-off recorded,
+cooldown elapsed). Admission is disabled + paused by default → the activation gate is **NO-GO
+by default**. A rehearsal is a pure dry-run projection that mutates no live set; owner sign-off
+is a governance gate bound to the proposed voting power; `request_activation` is ALWAYS blocked
+and performs NO live change (even a fully-GO gate is blocked with
+`live_activation_is_a_separate_owner_gated_action`). Nothing here activates a validator,
+changes a node's role, or grants voting power. Live activation is a separate, explicit,
+owner-gated action outside this readiness system. Not live.
 
 **ACAP Stage 8B — Validator Admission Preview Workflow — COMPLETE:** candidate-review →
 validator-admission PREVIEW. Key-control proof is necessary but never sufficient; candidate

@@ -153,6 +153,18 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
   proposal never admits a validator, grants voting power, or changes observer/vp0 state
 - These (8A/8B) are the unblocked internal track. Stage 7 (custody/reserve/verification/legal) remains blocked.
 
+**ACAP Stage 8C — Validator Pilot Activation Readiness — COMPLETED:**
+- [x] Twelve fail-closed activation gates (approved-preview reached, four-eyes/override
+  recorded, candidate readiness current, node still observer/vp0, key active, no incident,
+  distribution safe [operator ≥67% / external ≤33% / single ≤5%], admission enabled, admission
+  unpaused, rehearsal passed, owner sign-off recorded, cooldown elapsed) → NO-GO by default
+- [x] Rehearsal is a pure dry-run projection (mutates no live set); owner sign-off is a
+  governance gate bound to the proposed voting power
+- [x] `request_activation` is ALWAYS blocked + performs no live change; even a fully-GO gate
+  is blocked (`live_activation_is_a_separate_owner_gated_action`). Nothing activates a
+  validator, changes a node's role, or grants voting power. Live activation stays a separate,
+  owner-gated action outside this readiness system.
+
 **Owner-gated remainder (external Auction actions):**
 - [ ] Off-host backup destination configured + timer enabled (confirm synced).
 - [ ] Real providers onboarded to OPERATIONAL readiness (non-demo → configured →
