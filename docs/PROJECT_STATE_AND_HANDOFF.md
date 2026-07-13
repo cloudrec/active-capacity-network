@@ -188,8 +188,17 @@ Always rerun current tests; do not treat these historical counts as current proo
 The Alembic repair, Settlement Engine V1, Secondary Market Preview V1, Liquidity/
 Redemption/Buyback Readiness V1, the strict-schema guard, the PostgreSQL cutover
 rehearsal, the PSP signed-fixture verification harness, the **Stage 6B
-production-operations tooling**, and the **Stage 6C provider-onboarding interfaces** are
-**DONE — do not rebuild them.**
+production-operations tooling**, the **Stage 6C provider-onboarding interfaces**, and the
+**Stage 6D provider readiness-integrity + evidence governance** are **DONE — do not
+rebuild them.**
+
+**Stage 6D — Provider Readiness Integrity + Evidence Governance — COMPLETE:** fixes the
+Stage-6C defect where `active_registered` (administrative) was treated as operational
+readiness. Operational readiness is now fail-closed across separate axes; DEMO/fixture
+records never satisfy a production gate; evidence governance (hash-only, expiry,
+revocation, four-eyes) closes readiness on expiry/revocation; provider-specific
+operational gates; the cutover gate is split into `postgres_only` vs `payments_enabled`
+and never executes. Readiness only.
 
 **Stage 6B — Production Operations Readiness — tooling COMPLETE:** unified ops-status
 monitoring (schema drift + backup freshness + off-host + provider readiness), an alert

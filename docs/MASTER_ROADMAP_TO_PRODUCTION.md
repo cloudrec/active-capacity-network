@@ -128,13 +128,19 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
 
 **Stage 6C — Provider Onboarding Interfaces — COMPLETED:**
 - [x] Auditable onboarding lifecycle (draft → … → active_registered), hash-only evidence
-  + tamper-evident event chain; readiness flips into production-readiness / ops-status /
-  cutover-gate; admin UI + API. Readiness only.
+  + tamper-evident event chain; admin UI + API. Readiness only.
+
+**Stage 6D — Provider Readiness Integrity + Evidence Governance — COMPLETED:**
+- [x] `active_registered != operationally_ready`; DEMO/fixture fail-closed out of
+  production readiness; evidence governance (hash-only, expiry, revocation, four-eyes).
+- [x] Provider-specific operational gates; adapter capability contract; cutover gate split
+  (`postgres_only` vs `payments_enabled`, never executes).
 
 **Owner-gated remainder (external actions):**
 - [ ] Off-host backup destination configured + timer enabled (confirm synced).
-- [ ] Real providers onboarded + registered via the Stage-6C workflow (custody, reserve,
-  legal, PSP) — registering all four clears the cutover-gate providers gate.
+- [ ] Real providers onboarded to OPERATIONAL readiness (non-demo → configured →
+  capability-proven → independently-verified evidence with four-eyes → production_eligible).
+  Only production_eligible non-demo providers clear the payments cutover gate.
 - [ ] Provision production PostgreSQL; run the rehearsal + go/no-go gate (must be GO);
   owner-approved cutover; remove the temporary create mode so production resolves to
   strict; verify the guard at head; Numeric-at-rest verification after cutover.
