@@ -138,4 +138,13 @@ and proves every attack is blocked. It runs only against a throwaway store — n
 database — and activates nothing. A passing run means every attack failed; it is an internal
 check, not a substitute for an external independent security review.
 
+## Continuous governance monitor (Stage 8H)
+
+The safety invariants are not only asserted and attacked — they are watched over time. A continuous
+monitor records the standing invariants on each run (the security-review checklist read-only, plus
+the adversarial self-audit in an isolated subprocess) and detects drift: any invariant that regresses
+from pass to fail, or any attack that stops being blocked. It never changes any live state and
+activates nothing; alerts are disabled by default and contain no secret material. An example systemd
+timer ships so an operator can run it periodically and be warned early if the posture ever regresses.
+
 Everything here is private preview / readiness. No mainnet, rewards, or live consensus.

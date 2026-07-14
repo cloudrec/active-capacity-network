@@ -209,6 +209,18 @@ activation actions are attributed to that principal. Not live — nothing activa
 admission stays disabled + paused, observer / zero voting power. Next: an isolated consensus lab
 (sandboxed) and independent security-review preparation — no consensus started, no mainnet claimed.
 
+**ACAP Stage 8H — Continuous Governance Monitor + Drift Detector — COMPLETE:** a continuous check
+that records the standing safety invariants over time — the security-review checklist (read-only)
+plus the adversarial self-audit (run in an isolated subprocess) — persists each run to a monitor log
+with an audit event, and detects DRIFT: any invariant that regresses from pass to fail, or any attack
+that stops being blocked. Alerts are disabled by default, redacted, and contain no secret material.
+The monitor never mutates node / admission / activation state and activates nothing; a systemd timer
+example ships (not auto-enabled) so an operator can run it periodically and be warned early if the
+safety posture ever regresses. This completes the internal governance-readiness + observability
+track; the remaining next directions (an external independent review; the owner-gated Auction
+external path) are outside code control. Not live — nothing activates a validator or starts
+consensus.
+
 **ACAP Stage 8G — Adversarial Governance Self-Audit — COMPLETE:** an executable red-team harness
 that actively tries to break every standing safety invariant of the governance stack and proves
 each attack is BLOCKED — forged bearer token rejected, challenge replay blocked, duplicate active

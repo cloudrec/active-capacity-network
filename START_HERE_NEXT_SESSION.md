@@ -6,7 +6,7 @@ Read these files in order:
 2. [`docs/MASTER_ROADMAP_TO_PRODUCTION.md`](docs/MASTER_ROADMAP_TO_PRODUCTION.md) — where the project is going and production gates.
 3. [`README.md`](README.md) — public ACAP preview posture.
 
-Last updated: 2026-07-14 (Stage 8G).
+Last updated: 2026-07-14 (Stage 8H).
 
 ## Completed (do NOT rebuild)
 
@@ -124,6 +124,17 @@ Last updated: 2026-07-14 (Stage 8G).
   internal track; the next direction is an external independent review using the prepared handoff
   bundle — WITHOUT starting consensus or claiming mainnet. Nothing here activates a validator,
   grants voting power, or starts consensus. Not live.
+- **ACAP Stage 8H — Continuous Governance Monitor + Drift Detector V1:** a continuous check that
+  records the standing safety invariants over time — the security-review checklist (read-only) plus
+  the adversarial self-audit (run in an isolated subprocess) — and detects DRIFT: any invariant that
+  regresses from pass to fail, or any attack that stops being blocked. Each run is persisted to a
+  monitor log with an audit event; alerts are disabled by default, redacted, and contain no secret
+  material. The monitor never mutates node / admission / activation state and activates nothing. A
+  systemd timer example ships (not auto-enabled) so an operator can run it periodically and be
+  warned early if the safety posture ever regresses from what the self-audit proves today. This
+  completes the internal governance-readiness + observability track; the remaining next directions
+  (an external independent review; the owner-gated Auction external path) are outside code control.
+  Nothing here activates a validator or starts consensus. Not live.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 

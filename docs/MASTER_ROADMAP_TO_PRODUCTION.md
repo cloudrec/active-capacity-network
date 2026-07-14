@@ -185,6 +185,14 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
 - [x] Redacted reviewer handoff package (no secrets); NOT an external review. Public
       security-selfaudit page; admin run/handoff 401-gated. Nothing activates a validator.
 
+**ACAP Stage 8H — Continuous Governance Monitor + Drift Detector — COMPLETED:**
+- [x] Continuous monitor: records the standing invariants over time (checklist read-only + self-audit
+      isolated subprocess), persists to a monitor log, detects DRIFT (invariant regressing pass→fail
+      or an attack no longer blocked); disabled-by-default redacted alert (no secrets).
+- [x] Never mutates node/admission/activation state; activates nothing; systemd timer example ships
+      (not auto-enabled). Public governance-monitor page; admin status/history/run 401-gated.
+- This completes the internal governance-readiness + observability track (8A–8H).
+
 ### Next direction — Stage 9 preparation (NOT started; no consensus, no mainnet)
 - [ ] External independent security review using the prepared evidence bundle.
 - [ ] Only under a separate, explicit owner decision: a scoped, still-sandboxed consensus-lab
