@@ -6,7 +6,7 @@ Read these files in order:
 2. [`docs/MASTER_ROADMAP_TO_PRODUCTION.md`](docs/MASTER_ROADMAP_TO_PRODUCTION.md) — where the project is going and production gates.
 3. [`README.md`](README.md) — public ACAP preview posture.
 
-Last updated: 2026-07-13 (Stage 8E).
+Last updated: 2026-07-14 (Stage 8F).
 
 ## Completed (do NOT rebuild)
 
@@ -94,6 +94,21 @@ Last updated: 2026-07-13 (Stage 8E).
   lab (sandboxed, never wired to the live preview) and independent security-review preparation —
   WITHOUT starting consensus or claiming mainnet. Nothing here activates a validator, grants voting
   power, or starts consensus. Not live.
+- **ACAP Stage 8F — Isolated Consensus Lab + Independent Security-Review Prep V1:** (a) a SANDBOXED
+  consensus simulator — a deterministic, pure function of its scenario that computes consensus
+  safety, liveness, operator-majority and the BFT bound `f = floor((n-1)/3)` for crash and
+  byzantine fault models. It imports no live-mutating module, never reads or writes the live node
+  registry / governance store / activation state, persists nothing, and activates nothing; a
+  self-check confirms the live registry is byte-identical after a run. Every result is labelled
+  sandbox / not-live. (b) INDEPENDENT SECURITY-REVIEW PREPARATION — a machine-readable checklist of
+  the standing safety invariants (admission disabled + paused, activation NO-GO, durable fork-proof
+  audit, token-hash-only identities, real four-eyes, consensus-lab isolation) plus a REDACTED
+  evidence bundle for an external reviewer that explicitly excludes every kind of secret (tokens,
+  hashes, private keys, node public keys, nonces, operator identities, database contents, DSNs,
+  host paths, IPs, credentials). It claims no mainnet readiness and no attack resistance. This is
+  the unblocked internal track; the next direction is an external independent security review using
+  the prepared bundle — WITHOUT starting consensus or claiming mainnet. Nothing here runs consensus,
+  activates a validator, or grants voting power. Not live.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 

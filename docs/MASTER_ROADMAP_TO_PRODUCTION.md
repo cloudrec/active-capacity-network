@@ -166,9 +166,20 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
 - [x] Server-derived acting identity (bearer token or admin session), never the request body;
       admission + activation actions attributed to the principal. Nothing activates a validator.
 
-### Next direction — Stage 8F / Stage 9 preparation (NOT started; no consensus, no mainnet)
-- [ ] Isolated consensus-lab design (sandboxed; never wired to the live preview).
-- [ ] Independent security-review preparation.
+**ACAP Stage 8F — Isolated Consensus Lab + Independent Security-Review Prep — COMPLETED:**
+- [x] Sandboxed consensus simulator: deterministic safety / liveness / operator-majority /
+      BFT `f=floor((n-1)/3)` for crash + byzantine faults; pure function of its scenario;
+      imports no live-mutating module; mutates no live state; activates nothing (self-checked).
+- [x] Independent security-review prep: machine-readable checklist of standing invariants +
+      REDACTED evidence bundle (no secrets/tokens/keys/nonces/DSN/host paths); claims no mainnet
+      readiness or attack resistance.
+- [x] Public consensus-lab + security-review pages; admin sim/read endpoints 401-gated.
+      Nothing activates a validator; observer/vp0.
+
+### Next direction — Stage 9 preparation (NOT started; no consensus, no mainnet)
+- [ ] External independent security review using the prepared evidence bundle.
+- [ ] Only under a separate, explicit owner decision: a scoped, still-sandboxed consensus-lab
+      expansion (never wired to the live preview).
 
 **ACAP Stage 8D — Durable Governance State + Activation Manifest Integrity — COMPLETED:**
 - [x] Durable transactional governance store (SQLite WAL / FK / synchronous FULL / secure

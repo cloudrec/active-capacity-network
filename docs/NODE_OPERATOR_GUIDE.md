@@ -118,4 +118,14 @@ creator and proposer), a single operator acting alone stays production NO-GO. Th
 plumbing only: it never activates a validator, grants voting power, or starts consensus; every
 node stays an observer with zero voting power and validator admission stays disabled + paused.
 
+## Consensus lab + security-review prep (Stage 8F)
+
+Consensus safety and liveness are studied in a SANDBOXED lab — a deterministic simulator that is
+a pure function of the scenario it is given (validator power, operator share, crash / byzantine
+faults). It never touches any live network state, never admits or activates a validator, and
+starts no consensus; it only produces analysis (safety / liveness / operator-majority / BFT
+tolerance). Alongside it, a machine-readable security-review pack asserts the standing safety
+invariants of the whole stack and produces a redacted evidence bundle for an external reviewer
+that contains no secret material. Neither claims mainnet readiness or attack resistance.
+
 Everything here is private preview / readiness. No mainnet, rewards, or live consensus.

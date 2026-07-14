@@ -209,6 +209,20 @@ activation actions are attributed to that principal. Not live — nothing activa
 admission stays disabled + paused, observer / zero voting power. Next: an isolated consensus lab
 (sandboxed) and independent security-review preparation — no consensus started, no mainnet claimed.
 
+**ACAP Stage 8F — Isolated Consensus Lab + Independent Security-Review Prep — COMPLETE:** a
+sandboxed consensus simulator — a deterministic, pure function of its scenario computing safety,
+liveness, operator-majority and the BFT bound `f = floor((n-1)/3)` for crash + byzantine fault
+models — that imports no live-mutating module, never reads or writes live state, persists nothing,
+and activates nothing (a self-check confirms a byte-identical live registry after a run); plus an
+independent-security-review pack — a machine-readable checklist of the standing safety invariants
+(admission disabled + paused, activation NO-GO, durable fork-proof audit, token-hash-only
+identities, real four-eyes, consensus-lab isolation) and a REDACTED evidence bundle for an external
+reviewer that excludes every kind of secret (tokens, hashes, private keys, node public keys,
+nonces, operator identities, database contents, DSNs, host paths, IPs, credentials). It claims no
+mainnet readiness and no attack resistance. Not live — nothing runs consensus, activates a
+validator, or grants voting power. Next: an external independent security review using the prepared
+bundle — no consensus started, no mainnet claimed.
+
 **ACAP Stage 8D — Durable Governance State + Activation Manifest Integrity — COMPLETE:** all
 ACAP governance state now lives in a durable transactional store (SQLite WAL / foreign keys /
 synchronous FULL / secure permissions). Every protocol transition (proof verification, observer
