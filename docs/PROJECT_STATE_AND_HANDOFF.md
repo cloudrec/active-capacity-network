@@ -209,6 +209,19 @@ activation actions are attributed to that principal. Not live — nothing activa
 admission stays disabled + paused, observer / zero voting power. Next: an isolated consensus lab
 (sandboxed) and independent security-review preparation — no consensus started, no mainnet claimed.
 
+**ACAP Stage 8G — Adversarial Governance Self-Audit — COMPLETE:** an executable red-team harness
+that actively tries to break every standing safety invariant of the governance stack and proves
+each attack is BLOCKED — forged bearer token rejected, challenge replay blocked, duplicate active
+key blocked, audit fork prevented, four-eyes bypass blocked, owner override never satisfies
+production, plaintext token never stored, `request_activation` inert, consensus-lab cannot escape,
+store tamper detected, stale evidence rejected, no secret in the evidence bundle. The suite runs
+ONLY against a throwaway store (it refuses the production database), and the admin endpoint runs it
+in an isolated subprocess so the live store is byte-identical afterwards. A redacted reviewer
+handoff package pairs the checklist with the adversarial run and reproduction steps. It is
+explicitly NOT an external independent review and claims no mainnet readiness or attack resistance.
+Not live — nothing activates a validator, grants voting power, or starts consensus. Next: an
+external independent review using the prepared bundle — no consensus started, no mainnet claimed.
+
 **ACAP Stage 8F — Isolated Consensus Lab + Independent Security-Review Prep — COMPLETE:** a
 sandboxed consensus simulator — a deterministic, pure function of its scenario computing safety,
 liveness, operator-majority and the BFT bound `f = floor((n-1)/3)` for crash + byzantine fault

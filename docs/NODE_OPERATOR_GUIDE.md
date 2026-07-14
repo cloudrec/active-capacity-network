@@ -128,4 +128,14 @@ tolerance). Alongside it, a machine-readable security-review pack asserts the st
 invariants of the whole stack and produces a redacted evidence bundle for an external reviewer
 that contains no secret material. Neither claims mainnet readiness or attack resistance.
 
+## Adversarial self-audit (Stage 8G)
+
+The governance safety invariants are not only asserted — they are attacked. An executable
+red-team harness actively tries to break each one (forge a token, replay a challenge, bind a
+duplicate key, fork the audit chain, bypass four-eyes, push an override to production, leak a
+token, activate a validator, escape the consensus lab, tamper the store, reuse stale evidence)
+and proves every attack is blocked. It runs only against a throwaway store — never the production
+database — and activates nothing. A passing run means every attack failed; it is an internal
+check, not a substitute for an external independent security review.
+
 Everything here is private preview / readiness. No mainnet, rewards, or live consensus.

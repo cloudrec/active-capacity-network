@@ -176,6 +176,15 @@ harness (the `mock` provider is local-fixture only, WayForPay/Plisio real sandbo
 - [x] Public consensus-lab + security-review pages; admin sim/read endpoints 401-gated.
       Nothing activates a validator; observer/vp0.
 
+**ACAP Stage 8G — Adversarial Governance Self-Audit — COMPLETED:**
+- [x] Executable red-team harness: 12 attacks (forged token, challenge replay, duplicate key,
+      audit fork, four-eyes bypass, override→production, token leak, activation attempt, lab escape,
+      store tamper, stale evidence, secret-in-bundle) each proven BLOCKED.
+- [x] Runs only against a throwaway store (refuses the production DB); the admin endpoint runs it
+      in an isolated subprocess so the live store is byte-identical afterwards.
+- [x] Redacted reviewer handoff package (no secrets); NOT an external review. Public
+      security-selfaudit page; admin run/handoff 401-gated. Nothing activates a validator.
+
 ### Next direction — Stage 9 preparation (NOT started; no consensus, no mainnet)
 - [ ] External independent security review using the prepared evidence bundle.
 - [ ] Only under a separate, explicit owner decision: a scoped, still-sandboxed consensus-lab

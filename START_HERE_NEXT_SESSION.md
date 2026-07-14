@@ -6,7 +6,7 @@ Read these files in order:
 2. [`docs/MASTER_ROADMAP_TO_PRODUCTION.md`](docs/MASTER_ROADMAP_TO_PRODUCTION.md) — where the project is going and production gates.
 3. [`README.md`](README.md) — public ACAP preview posture.
 
-Last updated: 2026-07-14 (Stage 8F).
+Last updated: 2026-07-14 (Stage 8G).
 
 ## Completed (do NOT rebuild)
 
@@ -109,6 +109,21 @@ Last updated: 2026-07-14 (Stage 8F).
   the unblocked internal track; the next direction is an external independent security review using
   the prepared bundle — WITHOUT starting consensus or claiming mainnet. Nothing here runs consensus,
   activates a validator, or grants voting power. Not live.
+- **ACAP Stage 8G — Adversarial Governance Self-Audit V1:** an executable red-team harness that
+  actively tries to break every standing safety invariant of the governance stack and proves each
+  attack is BLOCKED — a forged bearer token cannot become a principal, a consumed challenge nonce
+  cannot be replayed, one public key cannot bind two active nodes, concurrent audit appends cannot
+  fork the chain, a single principal cannot self-satisfy production four-eyes, an owner override
+  never satisfies the production gate, a plaintext token is never stored, `request_activation`
+  stays inert, the consensus lab cannot mutate live state, a tampered audit event is detected,
+  changing a bound input invalidates the rehearsal + sign-off, and the evidence bundle carries no
+  secret. The suite runs ONLY against a throwaway store (it refuses the production database), and
+  the admin endpoint runs it in an isolated subprocess so the live store is byte-identical
+  afterwards. A redacted reviewer handoff package pairs the checklist with the adversarial run and
+  reproduction steps. It is explicitly NOT an external independent review. This is the unblocked
+  internal track; the next direction is an external independent review using the prepared handoff
+  bundle — WITHOUT starting consensus or claiming mainnet. Nothing here activates a validator,
+  grants voting power, or starts consensus. Not live.
 
 There is **no open Alembic failure** and **no open "build Settlement Engine" task**.
 
